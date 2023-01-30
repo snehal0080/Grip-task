@@ -1,0 +1,96 @@
+# The Spark Foundation Internship Task
+
+Task -2 :Prediction using Unsupervised ML (Iris Dataset)
+
+import pandas as pd
+
+data = pd.read_csv('Iris.csv') # first upload csv file on jupyter then data = pd.read_csv('filename.csv')
+
+data
+
+data.head()
+
+data.columns= ["ID","SL","SW","PL","PW","Species"]
+
+data
+
+#data.drop(index=[data.index[0]])
+
+data.describe()
+
+data.isna()  #isna replaced value with boolean like true or false ,NaN='Not a number' value represent true
+
+data.isna().sum()
+
+#data.dropna()
+
+#data.dropna(inplace=True)
+
+data.isna().sum()
+
+data["Species"].isna().sum()
+
+data["Species"].fillna("a")
+
+data.fillna(method="bfill")              #forward and backword fill
+
+data.fillna(method="ffill") #forward fill
+
+data["Species"].fillna(2.3)
+
+data['SL'].mean()
+
+a=data['SL'].mean()   #store value in variable
+a
+
+a=data['Species'].mode()[0]
+a
+
+data['Species'].fillna(a)
+
+a=data['PL'].median()
+a
+
+data['PW'].median()
+
+data.corr()
+
+import matplotlib.pyplot as plt
+x=data.iloc[:,:4]
+x
+
+data.dropna(inplace=True)
+
+x=data.iloc[:,1:5]     #1 means first row se 5th row tak values display
+x
+
+y=data.iloc[:,2:3]
+y
+
+x1=data.iloc[:,5].value_counts() #count values of same species
+
+x1
+
+#importing packages
+import seaborn as sns
+import matplotlib.pyplot as plt
+plt.title('Different species observed')
+sns.countplot(x='Species',data=data)     #data = y axis
+
+plt.title=('Identify species according to sepeal length and width')
+plt.xlabel('petal length')
+plt.ylabel('sepal length')
+plt.scatter(data['SL'],data['SW'],c='darkblue',marker='^')
+
+plt.title=('Identify species according to petal length and width')
+plt.xlabel('petal length')
+plt.ylabel('petal width')
+plt.scatter(data['PL'],data['PW'],c='black',marker='<')
+
+sns.FacetGrid(data, hue='Species', size=6).map(plt.scatter, 'SL', 'SW', marker='o')   #hue is function used for color
+plt.legend()
+
+sns.FacetGrid(data, hue='Species', size=6).map(plt.scatter, 'PL', 'PW', marker='o')   #hue is function used for color
+plt.legend()                                                                          #- x axis or | y axis
+
+data.to_csv(r"G:\New folder\iris.csv", header=True, index=False)
